@@ -8,21 +8,6 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Bidirectional
 import tensorflow as tf
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-# Configure TensorFlow to use the GPU if available
-try:
-    gpus = tf.config.experimental.list_physical_devices('GPU')
-    if gpus:
-        for gpu in gpus:
-            tf.config.experimental.set_memory_growth(gpu, True)
-        logging.info("GPU is available and configured.")
-    else:
-        logging.warning("GPU is not available. Using CPU.")
-except RuntimeError as e:
-    logging.error(f"Error configuring GPU: {e}")
-
 def create_plots_directory(directory='plots'):
     """Create a directory to save plots if it doesn't exist."""
     if not os.path.exists(directory):
@@ -152,3 +137,18 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Configure TensorFlow to use the GPU if available
+try:
+    gpus = tf.config.experimental.list_physical_devices('GPU')
+    if gpus:
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+        logging.info("GPU is available and configured.")
+    else:
+        logging.warning("GPU is not available. Using CPU.")
+except RuntimeError as e:
+    logging.error(f"Error configuring GPU: {e}")
